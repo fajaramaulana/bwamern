@@ -1,16 +1,43 @@
 import React, { Component } from 'react'
 
-import Header from 'parts/Header'
-
+import SideDrawer from 'parts/sidedrawer/SideDrawer'
+import Header from 'parts/Header/Header'
+import landingPage from 'json/landingPage.json'
+import Hero from 'parts/Hero.js'
+import Backdrop from 'parts/Backdrop/Backdrop';
 export default class LandingPage extends Component {
-    render() {
-        return (
-            <>
-            <Header {...this.props}>
+    state = {
+        sideDrawerOpen: false,
+    }
+    
+    drawerToggleClickHandler = () => {
+    this.setState(prevState => {
+            return {sideDrawerOpen: !prevState.sideDrawerOpen};
+        });
+    }
 
-            </Header>
+    backdropClickHandler = () => {
+        this.setState({ sideDrawerOpen: false })
+      }
+
+    render() {
+        let backdrop;
+
+        if(this.state.sideDrawerOpen){
+            backdrop = <Backdrop click={this.backdropClickHandler}/>
+        }
+        return (
+            <div style={{height: '100%'}}>
+            <Header drawerClickHandler={this.drawerToggleClickHandler} {...this.props}></Header>
+            <SideDrawer show={this.state.sideDrawerOpen}/>
+            {backdrop}
+
+            <main>
+            <Hero data={landingPage.hero}/>
+            </main>
+            
                 
-            </>
+            </div>
         )
     }
 }

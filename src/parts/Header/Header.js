@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "elements/Button";
 import BrandIcon from "parts/IconText";
+import DrawerToggleButton from "parts/sidedrawer/DrawerToggleButton"
 
 export default function Header(props) {
   const getNavLinkClass = (path) => {
@@ -11,7 +12,9 @@ export default function Header(props) {
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light">
           <BrandIcon />
-
+          <div className="navbar-toggle-button">
+            <DrawerToggleButton click={props.drawerClickHandler}/>
+          </div>
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto">
               <li className={`nav-item${getNavLinkClass("/")}`}>
