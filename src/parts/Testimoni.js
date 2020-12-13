@@ -9,7 +9,7 @@ export default function Testimoni({ data }) {
     <Fade bottom>
       <section className="container">
         <div className="row align-items-center">
-          <div className="col-auto" stlye={{ marginRight: 60 }}>
+          <div className="col-lg-5" stlye={{ marginRight: 60 }}>
             <div
               className="testimonial-hero"
               style={{ margin: `30px 0 0 30px` }}
@@ -23,8 +23,8 @@ export default function Testimoni({ data }) {
               <img
                 src={TestimoniAccent}
                 alt="Testimonial"
-                className="position-absolute"
-                style={{ margin: `-30px 0 0 -30px` }}
+                className="position-absolute img-fluid"
+                style={{ margin: `-30px 0 0 -20px` }}
               />
             </div>
           </div>

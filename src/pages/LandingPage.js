@@ -18,6 +18,11 @@ export default class LandingPage extends Component {
     sideDrawerOpen: false,
   };
 
+  componentDidMount() {
+    window.title = "Staycation | Home";
+    window.scrollTo(0, 0);
+  }
+
   drawerToggleClickHandler = () => {
     this.setState((prevState) => {
       return { sideDrawerOpen: !prevState.sideDrawerOpen };
