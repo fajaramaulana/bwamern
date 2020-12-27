@@ -232,6 +232,8 @@ section {
     height: 500px;
 }
 
+
+
 footer {
     border-top: 1px solid $gray-200;
     padding-top: 50px;
@@ -320,12 +322,25 @@ main {
     .details-penunjang {
         display: none;
     }
+    .bookinginfo-gambar {
+        padding-right: 10px !important;
+    }
+    .bookinginfo-data {
+        padding-left: 10px !important;
+    }
 }
 
 
 @media(min-width: 992px) {
     .navbar-toggle-button {
         display: none;
+    }
+
+    .bookinginfo-gambar {
+        padding-right: 10px !important;
+    }
+    .bookinginfo-data {
+        padding-left: 10px !important;
     }
 
 }

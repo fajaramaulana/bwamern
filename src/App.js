@@ -1,5 +1,6 @@
 import LandingPage from "pages/LandingPage";
 import DetailsPage from "pages/DetailsPage";
+import Checkout from "pages/Checkout";
 import Example from "pages/Example";
 import { createBrowserHistory } from "history";
 import React from "react";
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/properties/:id" component={DetailsPage} />
         <Route path="/contoh" component={Example}></Route>
+        <Route path="/checkout" component={Checkout}></Route>
       </Router>
     </div>
   );
