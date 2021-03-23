@@ -9,10 +9,7 @@ export default function BookingInformation(props) {
     <Fade>
       <div className="container" style={{ marginBottom: 30 }}>
         <div className="row justify-content-center align-items-center">
-          <div
-            className="col-lg-5 col-md-12 col-sm-12 bookinginfo-gambar py-5 border-right"
-            style={{ paddingRight: 80 }}
-          >
+          <div className="col-lg-5 col-md-12 col-sm-12 bookinginfo-gambar py-5 border-right">
             <Fade delay={300}>
               <div className="card">
                 <figure className="img-wrapper" style={{ height: 270 }}>

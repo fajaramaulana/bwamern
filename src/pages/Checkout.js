@@ -12,8 +12,9 @@ import BookingInformation from "parts/Checkout/BookingInformation";
 import Payment from "parts/Checkout/Payment";
 import Completed from "parts/Checkout/Completed";
 import ItemDetails from "json/itemDetails.json";
+import { connect } from "react-redux";
 
-export default class Checkout extends Component {
+class Checkout extends Component {
   state = {
     data: {
       firstName: "",
@@ -40,9 +41,31 @@ export default class Checkout extends Component {
   }
   render() {
     const { data } = this.state;
-    const checkout = {
-      duration: 3,
-    };
+    const { checkout } = this.props;
+
+    if (!checkout)
+      return (
+        <div className="container">
+          <div
+            className="row align-items-center justify-content-center text-center"
+            style={{ height: "100vh" }}
+          >
+            <div className="col-3">
+              Pilih kamar dulu
+              <div>
+                <Button
+                  className="btn mt-5"
+                  type="button"
+                  onClick={() => this.props.history.goBack()}
+                  isLight
+                >
+                  Back
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
     const steps = {
       bookingInformation: {
         title: "Booking Information",
@@ -96,7 +119,7 @@ export default class Checkout extends Component {
                     data.phone !== "" && (
                       <Fade>
                         <Button
-                          className="btn mb-3 d-md-inline-block"
+                          className="btn mr-2 btn-md d-md-inline-block"
                           type="button"
                           isPrimary
                           hasShadow
@@ -107,7 +130,7 @@ export default class Checkout extends Component {
                       </Fade>
                     )}
                   <Button
-                    className="btn d-md-inline-block"
+                    className="btn btn-md d-md-inline-block"
                     type="link"
                     isLight
                     href={`/properties/${checkout._id}`}
@@ -124,7 +147,7 @@ export default class Checkout extends Component {
                     data.bankHolder !== "" && (
                       <Fade>
                         <Button
-                          className="btn mb-3 d-md-inline-block"
+                          className="btn mr-2 btn-md d-md-inline-block"
                           type="button"
                           isPrimary
                           hasShadow
@@ -135,7 +158,7 @@ export default class Checkout extends Component {
                       </Fade>
                     )}
                   <Button
-                    className="btn d-md-inline-block"
+                    className="btn btn-md d-md-inline-block"
                     type="button"
                     isLight
                     onClick={prevStep}
@@ -165,3 +188,8 @@ export default class Checkout extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  checkout: state.checkout,
+});
+
+export default connect(mapStateToProps)(Checkout);
