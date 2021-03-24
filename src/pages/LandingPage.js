@@ -1,15 +1,18 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import SideDrawer from "parts/sidedrawer/SideDrawer";
 import Header from "parts/Header/Header";
-import landingPage from "json/landingPage.json";
+
 import Hero from "parts/Hero.js";
 import MostPicked from "parts/MostPicked";
 import Categories from "parts/Categories";
 import Testimoni from "parts/Testimoni";
 import Footer from "parts/Footer";
 import Backdrop from "parts/Backdrop/Backdrop";
-export default class LandingPage extends Component {
+
+import { fetchPage } from "store/actions/page";
+class LandingPage extends Component {
   constructor(props) {
     super(props);
     this.refMostPicked = React.createRef();
@@ -21,6 +24,12 @@ export default class LandingPage extends Component {
   componentDidMount() {
     window.title = "Staycation | Home";
     window.scrollTo(0, 0);
+
+    if (!this.props.page.landingPage)
+      this.props.fetchPage(
+        `${process.env.REACT_APP_HOST}/api/v1/member/landing-page`,
+        "landingPage"
+      );
   }
 
   drawerToggleClickHandler = () => {
@@ -34,8 +43,11 @@ export default class LandingPage extends Component {
   };
 
   render() {
-    let backdrop;
+    const { page } = this.props;
+    console.log(page);
+    if (!page.hasOwnProperty("landingPage")) return null;
 
+    let backdrop;
     if (this.state.sideDrawerOpen) {
       backdrop = <Backdrop click={this.backdropClickHandler} />;
     }
@@ -49,16 +61,25 @@ export default class LandingPage extends Component {
         {backdrop}
 
         <main>
-          <Hero refMostPicked={this.refMostPicked} data={landingPage.hero} />
+          <Hero
+            refMostPicked={this.refMostPicked}
+            data={page.landingPage.hero}
+          />
           <MostPicked
             refMostPicked={this.refMostPicked}
-            data={landingPage.mostPicked}
+            data={page.landingPage.mostPicked}
           />
-          <Categories data={landingPage.categories} />
-          <Testimoni data={landingPage.testimonial}></Testimoni>
+          <Categories data={page.landingPage.category} />
+          <Testimoni data={page.landingPage.testimonial} />
           <Footer />
         </main>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  page: state.page,
+});
+
+export default connect(mapStateToProps, { fetchPage })(LandingPage);

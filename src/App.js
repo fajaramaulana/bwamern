@@ -4,7 +4,7 @@ import Checkout from "pages/Checkout";
 import Example from "pages/Example";
 import { createBrowserHistory } from "history";
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import "assets/scss/style.scss";
 
 const history = createBrowserHistory({
