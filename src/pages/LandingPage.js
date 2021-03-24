@@ -10,8 +10,10 @@ import Categories from "parts/Categories";
 import Testimoni from "parts/Testimoni";
 import Footer from "parts/Footer";
 import Backdrop from "parts/Backdrop/Backdrop";
+import styled, { keyframes } from "styled-components";
 
 import { fetchPage } from "store/actions/page";
+
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -44,8 +46,26 @@ class LandingPage extends Component {
 
   render() {
     const { page } = this.props;
-    console.log(page);
-    if (!page.hasOwnProperty("landingPage")) return null;
+    if (!page.hasOwnProperty("landingPage"))
+      return (
+        <div className="container">
+          <div
+            className="row align-items-center justify-content-center text-center"
+            style={{ height: "100vh" }}
+          >
+            <div className="row d-flex justify-content-center">
+              <div className="col-lg-6 col-sm-12 d-flex justify-content-center">
+                <DotWrapper>
+                  <p className="h2 mr-2">Loading</p>
+                  <Dot delay="0s" />
+                  <Dot delay=".1s" />
+                  <Dot delay=".2s" />
+                </DotWrapper>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
 
     let backdrop;
     if (this.state.sideDrawerOpen) {
@@ -77,6 +97,26 @@ class LandingPage extends Component {
     );
   }
 }
+
+const BounceAnimation = keyframes`
+  0% { margin-bottom: 0; }
+  50% { margin-bottom: 15px }
+  100% { margin-bottom: 0 }
+`;
+const DotWrapper = styled.div`
+  display: flex;
+  align-items: flex-end;
+`;
+const Dot = styled.div`
+  background-color: black;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  /* Animation */
+  animation: ${BounceAnimation} 0.5s linear infinite;
+  animation-delay: ${(props) => props.delay};
+`;
 
 const mapStateToProps = (state) => ({
   page: state.page,
